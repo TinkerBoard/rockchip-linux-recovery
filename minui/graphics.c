@@ -381,6 +381,10 @@ int gr_init(void)
     if (!gr_draw) {
         gr_backend = open_drm();
         gr_draw = gr_backend->init(gr_backend);
+        if (gr_draw == NULL) {
+            printf("no drm device, disable recovery ui\n");
+            return -1;
+        }
     }
 #if 0
     if (!gr_draw) {
